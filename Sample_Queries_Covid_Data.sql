@@ -37,15 +37,12 @@ where continent not like 'NULL'
 group by location
 order by death_count desc; 
 
--- 7) This is the correct syntax for continent breakdown
--- The one above is incorrect. Take a look at query #2, it shows all of the countries excluding full continent data
--- Most likely the continent data where continent is NULL and country = continent is where full continent data is stored
--- The previous query is simply a summation of the different countries and the continents they belong to
+-- 7) Data on number of casualties by continent
 select location, MAX(total_deaths) as death_count
 from covid_deaths
 where continent like 'NULL'
 group by location
-order by location;
+order by death_count desc;
 
 -- 8) Global Numbers
 select date, sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, sum(new_deaths)/sum(new_cases) * 100 as death_percentage
